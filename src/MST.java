@@ -228,7 +228,7 @@ public class MST {
             // start time
             double stime = System.currentTimeMillis();
             String treeV="";
-            LinkedList<Edge>[] allEdges = adjacencylist;
+            LinkedList<Edge>[] allEdges = adjacencylist.clone();
             PriorityQueue<Edge> pq = new PriorityQueue<>(edges, Comparator.comparingInt(o -> o.weight));
 
             //add all the edges to priority queue, //sort the edges on weights
