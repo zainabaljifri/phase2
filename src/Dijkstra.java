@@ -112,7 +112,8 @@ public class Dijkstra {
 //            {  6, INF, INF,   8,   0,   2},
 //            {  5,   4,   4,   5,   2,   0}
 //        };
-        Dijkstra.dijkstra(graph, 0);
+        int source=0;
+        Dijkstra.dijkstra(graph, source);
     }
     
     static class edge{
