@@ -135,7 +135,7 @@ public class MST {
             double ftime = System.currentTimeMillis();
             System.out.println("Total runtime of Prim's Algorithm (Usin PQ): "+(ftime-stime)+" ms.");
             //print mst
-//            printMST(resultSet);
+            printMST(resultSet);
         }
 
         public void primMH() {
@@ -198,7 +198,7 @@ public class MST {
             double ftime = System.currentTimeMillis();
             System.out.println("Total runtime of Prim's Algorithm (Usin Min Heap): "+(ftime-stime)+" ms.");
             //print mst
-//            printMST(resultSet);
+            printMST(resultSet);
         }
 
         public void decreaseKey(MinHeap minHeap, int newKey, int vertex) {
@@ -216,8 +216,8 @@ public class MST {
             int total_min_weight = 0;
             System.out.println("Minimum Spanning Tree: ");
             for (int i = 1; i < vertices; i++) {
-                System.out.println("Edge: " + i + " - " + resultSet[i].parent
-                        + " weight: " + resultSet[i].weight);
+//                System.out.println("Edge: " + i + " - " + resultSet[i].parent
+//                        + " weight: " + resultSet[i].weight);
                 total_min_weight += resultSet[i].weight;
             }
             System.out.println("Total cost: " + total_min_weight);
@@ -242,8 +242,6 @@ public class MST {
 //                for (Edge edge : pq) {
 //                    System.out.println(edge.toString());
 //            }
-
-
             //create a parent []
             int[] parent = new int[vertices];
 
@@ -281,7 +279,7 @@ public class MST {
             System.out.println("Total runtime of Kruskal's Algorithm: "+(ftime-stime)+" ms.");
             
 //            System.out.println("Minimum Spanning Tree: ");
-//            printGraph(mst);
+            printGraph(mst);
         }
 
         public void makeSet(int[] parent) {
@@ -311,9 +309,9 @@ public class MST {
             int cost = 0;
             for (int i = 0; i < edgeList.size(); i++) {
                 Edge edge = edgeList.get(i);
-                System.out.println("Edge-" + i + " source: " + edge.source
-                        + " destination: " + edge.destination
-                        + " weight: " + edge.weight);
+//                System.out.println("Edge-" + i + " source: " + edge.source
+//                        + " destination: " + edge.destination
+//                        + " weight: " + edge.weight);
                 cost += edge.weight;
             }
             System.out.println("Minimum Spanning Tree Cost = " + cost);
@@ -323,7 +321,17 @@ public class MST {
         public void make_graph(Graph graph) {
             // instance of Random class
             Random random = new Random();
-            for (int i = 0; i < graph.edges; i++) {
+            // ensure that all vertices are connected
+            for (int i = 0; i < vertices-1; i++) {
+                    int w = random.nextInt(10) + 1;
+                    addEdge(i,i+1,w);
+                
+            }
+            
+            // generate random graph with the remaining edges
+            int remaning = edges- (vertices-1);
+            
+            for (int i = 0; i < remaning; i++) {
                 int source = random.nextInt(graph.vertices);
                 int dest = random.nextInt(graph.vertices);
                 if (dest == source || isConnected(source, dest, graph.adjacencylist)) { // to avoid self loops and duplicate edges
@@ -520,6 +528,7 @@ public class MST {
         if (choice == 1) {
             graph.kruskalMST();
             graph.primPQ();
+            graph.primMH();
         } else if (choice == 2) {
             graph.primMH();
             graph.primPQ();
