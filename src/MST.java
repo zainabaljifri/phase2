@@ -236,7 +236,7 @@ public class MST {
             // start time
             double stime = System.currentTimeMillis();
             String treeV=""; // this variable is used only in tracing
-            LinkedList<Edge>[] allEdges = adjacencylist.clone();
+            LinkedList<Edge>[] allEdges = adjacencylist.clone(); // modified data type from ArrayList to LinkedList
             PriorityQueue<Edge> pq = new PriorityQueue<>(edges, Comparator.comparingInt(o -> o.weight));
 
             //add all the edges to priority queue, //sort the edges on weights
@@ -551,3 +551,5 @@ public class MST {
     }
 
 }
+
+
