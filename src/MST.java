@@ -14,6 +14,7 @@ public class MST {
         int destination;
         int weight;
 
+        // constructor 
         public Edge(int source, int destination, int weight) {
             this.source = source;
             this.destination = destination;
@@ -36,6 +37,7 @@ public class MST {
         int weight;
     }
 
+    // all methods were added in the graph class
     static class Graph {
 
         int vertices;
@@ -43,6 +45,7 @@ public class MST {
         LinkedList<Edge>[] adjacencylist;
         
 
+        // constructor 
         Graph(int vertices, int edges) {
             this.vertices = vertices;
             this.edges = edges;
@@ -53,6 +56,7 @@ public class MST {
             }
         }
 
+        // this method is used in make_graph() method to add a new edge
         public void addEdge(int source, int destination, int weight) {
             Edge edge = new Edge(source, destination, weight);
             adjacencylist[source].addFirst(edge);
@@ -62,10 +66,10 @@ public class MST {
             
         }
 
+        // Prim's Algorithm using Priprity Queue
         public void primPQ() {
             //start time
             double stime = System.currentTimeMillis();
-
             boolean[] mst = new boolean[vertices];
             ResultSet[] resultSet = new ResultSet[vertices];
             int[] key = new int[vertices];  //keys used to store the key to know whether priority queue update is required
@@ -130,12 +134,15 @@ public class MST {
                     }
                 }
             }
+            //finish time of the algorithm
             double ftime = System.currentTimeMillis();
+            //print the total time consumed by the algorithm
             System.out.println("Total runtime of Prim's Algorithm (Usin PQ): "+(ftime-stime)+" ms.");
             //print mst
             printMST(resultSet);
         }
 
+        // Prim's Algorithm using Minheap
         public void primMH() {
             //start time
             double stime = System.currentTimeMillis();
@@ -143,7 +150,7 @@ public class MST {
             ResultSet[] resultSet = new ResultSet[vertices];
             //keys[] used to store the key to know whether min hea update is required
             int[] key = new int[vertices];
-          //create heapNode for all the vertices
+            //create heapNode for all the vertices
             HeapNode[] heapNodes = new HeapNode[vertices];
             for (int i = 0; i < vertices; i++) {
                 heapNodes[i] = new HeapNode();
@@ -193,7 +200,9 @@ public class MST {
                     }
                 }
             }
+            //finish time of the algorithm
             double ftime = System.currentTimeMillis();
+            //print the total time consumed by the algorithm
             System.out.println("Total runtime of Prim's Algorithm (Usin Min Heap): "+(ftime-stime)+" ms.");
             //print mst
             printMST(resultSet);
@@ -222,10 +231,11 @@ public class MST {
         }
 
 
+        // Kruskal's Algorithm
         public void kruskalMST() {
             // start time
             double stime = System.currentTimeMillis();
-            String treeV="";
+            String treeV=""; // this variable is used only in tracing
             LinkedList<Edge>[] allEdges = adjacencylist.clone();
             PriorityQueue<Edge> pq = new PriorityQueue<>(edges, Comparator.comparingInt(o -> o.weight));
 
@@ -272,10 +282,12 @@ public class MST {
 //                    System.out.println(e.toString());
 //                }
             }
-            //print MST
-            double ftime = System.currentTimeMillis();
-            System.out.println("Total runtime of Kruskal's Algorithm: "+(ftime-stime)+" ms.");
             
+            //finish time of the algorithm
+            double ftime = System.currentTimeMillis();
+            //print the total time consumed by the algorithm
+            System.out.println("Total runtime of Kruskal's Algorithm: "+(ftime-stime)+" ms.");
+            //print MST
 //            System.out.println("Minimum Spanning Tree: ");
             printGraph(mst);
         }
@@ -523,10 +535,13 @@ public class MST {
         }
         Graph graph = new Graph(n, m);
         graph.make_graph(graph);
+        // to perform Task 2 
         if (choice == 1) {
             graph.kruskalMST();
             graph.primPQ();
-        } else if (choice == 2) {
+        } 
+        // to perform Task 3
+        else if (choice == 2) {
             graph.primMH();
             graph.primPQ();
         }
@@ -536,5 +551,3 @@ public class MST {
     }
 
 }
-
-
