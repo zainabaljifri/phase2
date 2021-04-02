@@ -526,7 +526,6 @@ public class MST {
         if (choice == 1) {
             graph.kruskalMST();
             graph.primPQ();
-            graph.primMH();
         } else if (choice == 2) {
             graph.primMH();
             graph.primPQ();
@@ -537,3 +536,5 @@ public class MST {
     }
 
 }
+
+
